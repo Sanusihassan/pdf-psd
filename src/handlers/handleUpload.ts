@@ -68,39 +68,17 @@ export const handleUpload = async (
       outputFileMimeType: "application/pdf",
       outputFileName: `${originalFileName}.pdf`,
     },
-    "application/msword": {
-      outputFileMimeType: "application/msword",
-      outputFileName: `${originalFileName}.docx`,
+    "image/vnd.adobe.photoshop": {
+      outputFileMimeType: "image/vnd.adobe.photoshop",
+      outputFileName: `${originalFileName}.psd`,
     },
-    "application/vnd.openxmlformats-officedocument.wordprocessingml.document": {
+    "application/photoshop": {
       outputFileMimeType:
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-      outputFileName: `${originalFileName}.docx`,
-    },
-    "application/vnd.ms-excel": {
-      outputFileMimeType: "application/vnd.ms-excel",
-      outputFileName: `${originalFileName}.xlsx`,
-    },
-    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
-      outputFileMimeType:
-        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-      outputFileName: `${originalFileName}.xlsx`,
-    },
-    "application/vnd.ms-powerpoint": {
-      outputFileMimeType: "application/vnd.ms-powerpoint",
-      outputFileName: `${originalFileName}.pptx`,
-    },
-    "application/vnd.openxmlformats-officedocument.presentationml.presentation":
-    {
-      outputFileMimeType:
-        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
-      outputFileName: `${originalFileName}.pptx`,
-    },
-    "text/plain": {
-      outputFileMimeType: "text/plain",
-      outputFileName: `${originalFileName}.txt`,
+        "application/photoshop",
+      outputFileName: `${originalFileName}.psd`,
     },
   };
+
 
   try {
     const response = await axios.post(url, formData, {
