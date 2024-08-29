@@ -4,11 +4,9 @@ import {
   useRef
 } from "react";
 
-import Options, { OptionsProps } from "./DisplayFile/Options";
 import type { edit_page } from "../content";
 import ErrorElement from "./ErrorElement";
 import type { errors as _ } from "../content";
-import { Spinner } from "react-bootstrap";
 import { CogIcon } from "@heroicons/react/outline";
 // import { ToolStoreContext } from "../src/ToolStoreContext";
 import { useDispatch, useSelector } from "react-redux";

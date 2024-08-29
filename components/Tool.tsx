@@ -77,6 +77,7 @@ const Tool: React.FC<ToolProps> = ({
   // drag and drop input handling
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const isValid = validateFiles(acceptedFiles, data.type, errors, dispatch, { path: data.to });
+    console.log("isValid", isValid);
     if (isValid) {
       setFiles(acceptedFiles);
       handleHideTool();

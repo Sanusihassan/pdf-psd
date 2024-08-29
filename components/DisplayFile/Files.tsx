@@ -5,8 +5,6 @@ import FileCard from "./FileCard";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { isDraggableExtension } from "../../src/utils";
 import { useRouter } from "next/router";
-import { useSelector, useDispatch } from "react-redux";
-import store, { ToolState } from "../../src/store";
 import { useFileStore } from "../../src/file-store";
 
 type FileProps = {
@@ -29,7 +27,7 @@ const Files = ({
   // const store = useSelector((state: { tool: ToolState }) => state.tool);
   const { files, imageUrls, setImageUrls } = useFileStore();
 
-  useEffect(() => {}, [files]);
+  useEffect(() => { }, [files]);
 
   const router = useRouter();
   const handleDragEnd = (result: any) => {
@@ -49,9 +47,8 @@ const Files = ({
         <Droppable droppableId="imageUrls" direction="horizontal">
           {(provided, snapshot) => (
             <div
-              className={`display-file ${
-                snapshot.isDraggingOver ? "dragging-over" : ""
-              }`}
+              className={`display-file ${snapshot.isDraggingOver ? "dragging-over" : ""
+                }`}
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
@@ -67,15 +64,14 @@ const Files = ({
                     <div
                       {...provided.draggableProps}
                       ref={provided.innerRef}
-                      className={`drag-element ${
-                        snapshot.isDragging ? "dragging" : ""
-                      }`}
+                      className={`drag-element ${snapshot.isDragging ? "dragging" : ""
+                        }`}
                       style={{
                         ...provided.draggableProps.style,
                       }}
                     >
                       {/* isDraggableExtension(extension) ? ( */}
-                      {extension === ".jpg" ? (
+                      {extension === ".psd" ? (
                         (() => {
                           return (
                             <ImageCard

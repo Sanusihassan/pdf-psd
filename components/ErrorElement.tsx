@@ -4,11 +4,6 @@ import { useSelector } from "react-redux";
 import { ToolState } from "../src/store";
 
 const ErrorElement = () => {
-  // const dispatch = useDispatch();
-  const showErrorMessage = useSelector(
-    (state: { tool: ToolState }) => state.tool.showErrorMessage
-  );
-
   const errorMessage = useSelector(
     (state: { tool: ToolState }) => state.tool.errorMessage
   );
@@ -16,7 +11,7 @@ const ErrorElement = () => {
     <>
       <div
         style={{
-          display: showErrorMessage ? "block" : "none",
+          display: errorMessage.length ? "block" : "none",
         }}
         className="error-element alert alert-danger text-center mt-3"
         role="alert"

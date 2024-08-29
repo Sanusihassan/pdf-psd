@@ -1,10 +1,12 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ActionDiv } from "./ActionDiv";
 import { Tooltip } from "react-tooltip";
 import type { errors as _ } from "../../content";
 import { useDispatch } from "react-redux";
 import { getFileDetailsTooltipContent } from "../../src/utils";
 import { Loader } from "./Loader";
+import { readPsd } from 'ag-psd';
+
 interface ImageCardProps {
   index: number;
   provided: any;
@@ -30,20 +32,39 @@ const ImageCard: React.FC<ImageCardProps> = ({
   const [tooltipSize, setToolTipSize] = useState("");
   const dispatch = useDispatch();
   let isSubscribed = true;
-  let p = getFileDetailsTooltipContent(
-    file,
-    ...fileDetailProps,
-    dispatch,
-    errors
-  );
-  p.then((size) => {
-    setToolTipSize(size);
-  });
+
+  useEffect(() => {
+    const getTooltipContent = async () => {
+      const size = await getFileDetailsTooltipContent(
+        file,
+        ...fileDetailProps,
+        dispatch,
+        errors
+      );
+      if (isSubscribed) {
+        setToolTipSize(size);
+      }
+    };
+    getTooltipContent();
+  }, [file, fileDetailProps, dispatch, errors]);
+
   useEffect(() => {
     const processFile = async () => {
       try {
         setShowLoader(true);
-        if (extension && extension === ".jpg") {
+        if (extension && (extension === ".psd" || extension === ".psb")) {
+          const arrayBuffer = await file.arrayBuffer();
+          const psd = readPsd(new Uint8Array(arrayBuffer));
+
+          if (psd.canvas) {
+            const dataUrl = psd.canvas.toDataURL();
+            if (isSubscribed) {
+              setImageUrl(dataUrl);
+            }
+          } else {
+            console.error("Failed to render PSD: No canvas available");
+          }
+        } else if (extension === ".jpg" || extension === ".jpeg" || extension === ".png") {
           const reader = new FileReader();
           reader.onload = function (event: ProgressEvent<FileReader>) {
             const imageUrl = (event.target as FileReader).result as string;
@@ -56,7 +77,9 @@ const ImageCard: React.FC<ImageCardProps> = ({
       } catch (error) {
         console.error("Error processing files:", error);
       } finally {
-        // setShowLoader(false);
+        if (isSubscribed) {
+          setShowLoader(false);
+        }
       }
     };
     processFile();
@@ -64,11 +87,12 @@ const ImageCard: React.FC<ImageCardProps> = ({
       isSubscribed = false;
     };
   }, [extension, file]);
+
   return (
     <div
       className="drag-element-img"
       data-tooltip-id={`image_tooltip_${index}`}
-      data-tooltip-content={tooltipSize}
+      data-tooltip-html={tooltipSize}
       data-tooltip-place="top"
       {...provided.dragHandleProps}
       style={{
@@ -81,7 +105,7 @@ const ImageCard: React.FC<ImageCardProps> = ({
         errors={errors}
         fileName={file.name}
       />
-      {showLoader ? <Loader loader_text={loader_text} /> : null}
+      {showLoader && <Loader loader_text={loader_text} />}
       <bdi>
         <Tooltip id={`image_tooltip_${index}`} />
       </bdi>

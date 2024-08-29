@@ -172,7 +172,7 @@ export const getPlaceHoderImageUrl = (extension: string) => {
 
 // a function to check if the extension is .jpg or .pdf:
 export const isDraggableExtension = (ext: string, router: NextRouter) => {
-  return ext === ".jpg" || router.asPath.includes("merge-pdf");
+  return ext === ".psd" || router.asPath.includes("merge-pdf");
 };
 
 export function isrtllang(asPath: string): boolean {
@@ -184,7 +184,7 @@ export const validateFiles = (
   extension: string,
   errors: _,
   dispatch: Dispatch<AnyAction>,
-  state: {
+  state?: {
     path: string;
   }
 ) => {
@@ -192,14 +192,10 @@ export const validateFiles = (
 
   let allowedMimeTypes = [
     "application/pdf",
-    "image/vnd.adobe.photoshop"
+    "image/vnd.adobe.photoshop",
+    "application/photoshop",
+    "image/psd",
   ];
-  // validation for merge-pdf page & empty files
-  if (state.path == "merge-pdf" && files.length <= 1) {
-    dispatch(setField({ errorMessage: errors.ERR_UPLOAD_COUNT.message }));
-    dispatch(setField({ errorCode: "ERR_UPLOAD_COUNT" }));
-    return false;
-  }
   if (files.length == 0) {
     dispatch(setField({ errorMessage: errors.NO_FILES_SELECTED.message }));
     dispatch(setField({ errorCode: "ERR_NO_FILES_SELECTED" }));
@@ -219,10 +215,6 @@ export const validateFiles = (
     if (!file || !file.name) {
       // handle FILE_CORRUPT error
       dispatch(setField({ errorMessage: errors.FILE_CORRUPT.message }));
-      return false;
-    } else if (!file.type) {
-      // handle NOT_SUPPORTED_TYPE error
-      dispatch(setField({ errorMessage: errors.NOT_SUPPORTED_TYPE.message }));
       return false;
     } else if (
       !allowedMimeTypes.includes(file.type) ||

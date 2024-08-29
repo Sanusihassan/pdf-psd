@@ -14,6 +14,7 @@
     "@types/node": "20.5.7",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
+    "ag-psd": "^21.0.1",
     "axios": "^1.5.0",
     "cssmolecule": "^1.0.1",
     "custom-bs": "^1.3.0",
@@ -35,6 +36,7 @@
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.6",
+    "@types/psd": "^3.4.3",
     "@types/react-beautiful-dnd": "^13.1.8",
     "next-transpile-modules": "^10.0.1",
     "sass": "^1.66.1",
