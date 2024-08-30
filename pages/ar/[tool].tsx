@@ -48,7 +48,7 @@ export default ({ item, lang }: { item: data_type; lang: string }) => {
     description: item.description,
     url: `https://www.pdfequips.com${asPath}`,
   };
-  const howToSchema = item.to === "pdf-to-psd" ? howToSchemas.PDFToPSDHowTo : howToSchemas.PSDToPDFHowTo;
+  const howToSchema = item.to === "/pdf-to-psd" ? howToSchemas.PDFToPSDHowTo : howToSchemas.PSDToPDFHowTo;
   return (
     <>
       <Head>
