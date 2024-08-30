@@ -220,12 +220,12 @@ export const validateFiles = (
       !allowedMimeTypes.includes(file.type) ||
       !types.includes(file_extension.toLowerCase())
     ) {
-      const errorMessage =
-        errors.NOT_SUPPORTED_TYPE.types[
-        extension as keyof typeof errors.NOT_SUPPORTED_TYPE.types
-        ] || errors.NOT_SUPPORTED_TYPE.message;
-      dispatch(setField({ errorMessage: errorMessage }));
-      return false;
+      // const errorMessage =
+      //   errors.NOT_SUPPORTED_TYPE.types[
+      //   extension as keyof typeof errors.NOT_SUPPORTED_TYPE.types
+      //   ] || errors.NOT_SUPPORTED_TYPE.message;
+      // dispatch(setField({ errorMessage: errorMessage }));
+      // return false;
     } else if (file.size > fileSizeLimit) {
       // handle FILE_TOO_LARGE error
       dispatch(setField({ errorMessage: errors.FILE_TOO_LARGE.message }));
