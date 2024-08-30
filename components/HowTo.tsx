@@ -25,15 +25,15 @@ const HowTo = ({
         <div className="col-12 col-md-6 text-center image">
           <picture>
             <source
-              srcSet={`/images/how-to-convert-${imgSrc}-ad-xs.png`}
+              srcSet={`/images/how-to-convert-${imgSrc}-xs.png`}
               media="(max-width: 575px)"
             />
             <source
-              srcSet={`/images/how-to-convert-${imgSrc}-ad-md.png`}
+              srcSet={`/images/how-to-convert-${imgSrc}-md.png`}
               media="(min-width: 575px) and (max-width: 1200px)"
             />
             <source
-              srcSet={`/images/how-to-convert-${imgSrc}-ad-xl.png`}
+              srcSet={`/images/how-to-convert-${imgSrc}-xl.png`}
               media="(min-width: 1200px)"
             />
             <img
