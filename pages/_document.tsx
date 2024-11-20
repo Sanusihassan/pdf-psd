@@ -31,11 +31,6 @@ const MyDocument = ({ lang }: { lang: string }) => {
           href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
           rel="stylesheet"
         />
-        <meta name="google-adsense-account" content="ca-pub-7391414384206267" />
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7391414384206267"
-          cross-origin="anonymous"></script>
       </Head>
       <body>
         <Main />
