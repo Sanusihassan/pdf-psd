@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@builder.io/partytown": "^0.10.3",
     "@heroicons/react": "^1.0.6",
     "@reduxjs/toolkit": "^1.9.5",
     "@types/node": "20.5.7",
@@ -22,7 +23,7 @@
     "js-cookie": "^3.0.5",
     "next": "13.4.19",
     "pdfequips-footer": "^0.1.6",
-    "pdfequips-navbar": "^3.3.8",
+    "pdfequips-navbar": "^3.4.3",
     "pdfequips-open-graph": "^1.0.0",
     "pdfjs-dist": "^3.8.162",
     "react": "18.2.0",
