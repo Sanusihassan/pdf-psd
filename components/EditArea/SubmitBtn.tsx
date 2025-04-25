@@ -3,12 +3,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { useFileStore } from "../../src/file-store";
 import { ToolState, setField } from "../../src/store";
 import type { edit_page } from "../../content";
+import { fetchSubscriptionStatus, canUseSiteToday } from "fetch-subscription-status";
 export function SubmitBtn({
   k,
   edit_page,
+  lang
 }: {
   k: string;
   edit_page: edit_page;
+  lang: string;
 }): JSX.Element {
   const dispatch = useDispatch();
   const { submitBtn } = useFileStore();
@@ -22,11 +25,20 @@ export function SubmitBtn({
   return (
     <button
       className={`submit-btn btn btn-lg text-white position-relative overflow-hidden ${k} grid-footer`}
-      onClick={() => {
+      onClick={async () => {
         dispatch(setField({ isSubmitted: true }));
         dispatch(setField({ showOptions: false }));
-        if (submitBtn) {
-          submitBtn?.current?.click();
+        const status = await fetchSubscriptionStatus();
+        if (!status && !canUseSiteToday(10)) {
+          if (!canUseSiteToday(1)) {
+            if (typeof window !== "undefined") {
+              window.open(`${(lang === "" ? "" : "/") + lang}/pricing`, "_blank");
+            }
+          } else {
+            if (submitBtn) {
+              submitBtn?.current?.click();
+            }
+          }
         }
       }}
       disabled={errorMessage.length > 0}
