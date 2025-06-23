@@ -22,7 +22,7 @@
     "fetch-subscription-status": "^1.0.2",
     "js-cookie": "^3.0.5",
     "next": "13.4.19",
-    "pdfequips-footer": "^0.1.7",
+    "pdfequips-footer": "^0.1.9",
     "pdfequips-navbar": "^3.5.7",
     "pdfequips-open-graph": "^1.0.0",
     "pdfjs-dist": "^3.8.162",
